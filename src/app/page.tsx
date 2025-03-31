@@ -1,37 +1,121 @@
-export default function Home() {
-  return (
-    <div className="flex bg-black/60 h-screen w-full justify-center items-center ">
-      <div className="flex flex-col space-x-10 w-[970px] h-[700px] bg-white rounded-[64px] rounded-br-[270px] shadow-2xs p-[50px]">
-        <div className="flex flex-row border-2">
+"use client";
+import { useState } from "react";
 
-          <div className="flex flex-col border-2 ">
-            <span className="text-3xl">DAY</span>
+export default function Home() {
+  // กำหนด type ให้กับ state
+  const [day, setDay] = useState<number | "">("");
+  const [month, setMonth] = useState<number | "">("");
+  const [year, setYear] = useState<number | "">("");
+  const [ageYears, setAgeYears] = useState<number | "--">("--");
+  const [ageMonths, setAgeMonths] = useState<number | "--">("--");
+  const [ageDays, setAgeDays] = useState<number | "--">("--");
+  const [required, setRequired] = useState<number | 0>(0);
+
+  // ฟังก์ชันคำนวณอายุ พร้อมกำหนด Type
+  const calculateAge = (): void => {
+    if (!day || !month || !year) {
+      setRequired(1)
+      return;
+    } else {
+      setRequired(0)
+    }
+
+    const birthDate = new Date(`${year}-${month}-${day}`);
+    if (isNaN(birthDate.getTime())) {
+      alert("กรุณากรอกวันที่ถูกต้อง");
+      return;
+    }
+
+    const today = new Date();
+    let years: number = today.getFullYear() - birthDate.getFullYear();
+    let months: number = today.getMonth() - birthDate.getMonth();
+    let days: number = today.getDate() - birthDate.getDate();
+
+    if (days < 0) {
+      months -= 1;
+      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+
+    setAgeYears(years);
+    setAgeMonths(months);
+    setAgeDays(days);
+  };
+
+  return (
+    <div className="flex bg-black/60 h-screen w-full justify-center items-center">
+      <div className="relative flex flex-col space-x-10 w-[970px] h-[700px] bg-white rounded-[64px] rounded-br-[270px] shadow-2xs p-[50px]">
+        <div className="flex flex-row space-x-5">
+          <div className="flex flex-col">
+            <span className={`text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>
+              DAY
+            </span>
             <input
-              type="text"
+              type="number"
+              placeholder="DD"
               title="Day"
-              className="border border-[#854DFF] p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold" />
+              value={day}
+              onChange={(e) => setDay(e.target.value ? parseInt(e.target.value) : "")}
+              className={`p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold border 
+                ${required === 1 ? "border-red-500" : "border-[#854DFF]"}`}
+            />
+            {required == 1 && (<span className="text-[18px] text-red-500">this flied is required</span>)}
           </div>
           <div className="flex flex-col">
-            <span className="text-3xl">MONTH</span>
+            <span className={`text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>MONTH</span>
             <input
-              type="text"
+              type="number"
+              placeholder="MM"
               title="Month"
-              className="border border-[#854DFF] p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold" />
+              value={month}
+              onChange={(e) => setMonth(e.target.value ? parseInt(e.target.value) : "")}
+              className={`p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold border 
+                ${required === 1 ? "border-red-500" : "border-[#854DFF]"}`}
+            />
+            {required == 1 && (<span className="text-[18px] text-red-500">this flied is required</span>)}
           </div>
           <div className="flex flex-col">
-            <span className="text-3xl">YEAR</span>
+            <span className={`text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>YEAR</span>
             <input
-              type="text"
+              type="number"
               title="Year"
-              className="border border-[#854DFF] p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold" />
+              placeholder="YYYY"
+              value={year}
+              onChange={(e) => setYear(e.target.value ? parseInt(e.target.value) : "")}
+              className={`p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold border 
+                ${required === 1 ? "border-red-500" : "border-[#854DFF]"}`}
+            />
+            {required == 1 && (<span className="text-[18px] text-red-500">this flied is required</span>)}
           </div>
         </div>
-        <div className="w-full h-1 bg-[#854DFF]">
-          เส้นแบ่ง
+        <div className="relative flex items-center">
+          <div className="w-full h-[2px] my-10 bg-[#854DFF]"></div>
+          <button
+            title="go"
+            onClick={calculateAge}
+            className="flex absolute right-0 w-[125px] h-[125px] rounded-full bg-black p-8"
+          >
+            <img src="assets/images/icon-arrow.svg" alt="" />
+          </button>
+        </div>
+
+        {/* แสดงผลลัพธ์ที่คำนวณได้ */}
+        <div className="text-8xl font-bold">
+          <h1>
+            <span className="text-[#854DFF]">{ageYears}</span> years
+          </h1>
+          <h1>
+            <span className="text-[#854DFF]">{ageMonths}</span> months
+          </h1>
+          <h1>
+            <span className="text-[#854DFF]">{ageDays}</span> days
+          </h1>
         </div>
       </div>
-
     </div>
-  )
+  );
 }
-
