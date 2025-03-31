@@ -47,8 +47,8 @@ export default function Home() {
   };
 
   return (
-    <div className="flex bg-black/60 h-screen w-full justify-center items-center">
-      <div className="relative flex flex-col space-x-10 w-[970px] h-[700px] bg-white rounded-[64px] rounded-br-[270px] shadow-2xs p-[50px]">
+    <div className="flex bg-black/60 h-full w-full justify-center items-center p-4" >
+      <div className="relative flex flex-col space-x-10 md:w-[970px] md:h-[700px] w-full bg-white md:rounded-[64px]  md:rounded-br-[270px] rounded-[24px] rounded-br-[170px]  shadow-2xs p-[50px]">
         <div className="flex flex-row space-x-5">
           <div className="flex flex-col">
             <span className={`text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>
@@ -92,19 +92,19 @@ export default function Home() {
             {required == 1 && (<span className="text-[18px] text-red-500">this flied is required</span>)}
           </div>
         </div>
-        <div className="relative flex items-center">
+        <div className="relative flex items-center lg:my-5 my-10 justify-center  ">
           <div className="w-full h-[2px] my-10 bg-[#854DFF]"></div>
           <button
             title="go"
             onClick={calculateAge}
-            className="flex absolute right-0 w-[125px] h-[125px] rounded-full bg-black p-8"
+            className="flex absolute lg:right-0 rounded-full bg-black md:p-8 p-4"
           >
             <img src="assets/images/icon-arrow.svg" alt="" />
           </button>
         </div>
 
         {/* แสดงผลลัพธ์ที่คำนวณได้ */}
-        <div className="text-8xl font-bold">
+        <div className="md:text-8xl font-bold text-5xl  ">
           <h1>
             <span className="text-[#854DFF]">{ageYears}</span> years
           </h1>
