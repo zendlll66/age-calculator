@@ -48,10 +48,10 @@ export default function Home() {
 
   return (
     <div className="flex bg-black/60 h-full w-full justify-center items-center p-4" >
-      <div className="relative flex flex-col space-x-10 md:w-[970px] md:h-[700px] w-full bg-white md:rounded-[64px]  md:rounded-br-[270px] rounded-[24px] rounded-br-[170px]  shadow-2xs p-[50px]">
-        <div className="flex flex-row space-x-5">
-          <div className="flex flex-col">
-            <span className={`text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>
+      <div className="relative flex flex-col space-x-10 md:w-[970px] md:h-[700px] w-full bg-white md:rounded-[64px]  md:rounded-br-[270px] rounded-[24px] rounded-br-[170px]  shadow-2xs md:p-[50px] p-[20px]">
+        <div className="flex flex-row gap-x-2 md:space-x-5  w-full p-2">
+          <div className="flex flex-col w-auto">
+            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>
               DAY
             </span>
             <input
@@ -60,51 +60,51 @@ export default function Home() {
               title="Day"
               value={day}
               onChange={(e) => setDay(e.target.value ? parseInt(e.target.value) : "")}
-              className={`p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold border 
+              className={`p-2 rounded-[12px] md:w-[180px] md:h-[90px] w-full  outline-none md:text-5xl font-bold border 
                 ${required === 1 ? "border-red-500" : "border-[#854DFF]"}`}
             />
-            {required == 1 && (<span className="text-[18px] text-red-500">this flied is required</span>)}
+            {required == 1 && (<span className="md:text-[18px]  text-[12px] text-red-500">this flied is required</span>)}
           </div>
           <div className="flex flex-col">
-            <span className={`text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>MONTH</span>
+            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>MONTH</span>
             <input
               type="number"
               placeholder="MM"
               title="Month"
               value={month}
               onChange={(e) => setMonth(e.target.value ? parseInt(e.target.value) : "")}
-              className={`p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold border 
+              className={`p-2 rounded-[12px] md:w-[180px] md:h-[90px] outline-none md:text-5xl w-full font-bold border 
                 ${required === 1 ? "border-red-500" : "border-[#854DFF]"}`}
             />
-            {required == 1 && (<span className="text-[18px] text-red-500">this flied is required</span>)}
+            {required == 1 && (<span className="md:text-[18px]  text-[12px] text-red-500">this flied is required</span>)}
           </div>
           <div className="flex flex-col">
-            <span className={`text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>YEAR</span>
+            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>YEAR</span>
             <input
               type="number"
               title="Year"
               placeholder="YYYY"
               value={year}
               onChange={(e) => setYear(e.target.value ? parseInt(e.target.value) : "")}
-              className={`p-2 rounded-[12px] w-[180px] h-[90px] outline-none text-5xl font-bold border 
+              className={`p-2 rounded-[12px] md:w-[180px] md:h-[90px] outline-none md:text-5xl w-full font-bold border 
                 ${required === 1 ? "border-red-500" : "border-[#854DFF]"}`}
             />
-            {required == 1 && (<span className="text-[18px] text-red-500">this flied is required</span>)}
+            {required == 1 && (<span className="md:text-[18px] text-[12px] text-red-500">this flied is required</span>)}
           </div>
         </div>
-        <div className="relative flex items-center lg:my-5 my-10 justify-center  ">
+        <div className="relative flex items-center w-full lg:my-5 my-7 justify-center  ">
           <div className="w-full h-[2px] my-10 bg-[#854DFF]"></div>
           <button
             title="go"
             onClick={calculateAge}
-            className="flex absolute lg:right-0 rounded-full bg-black md:p-8 p-4"
+            className="flex absolute lg:right-0 rounded-full focus:bg-black bg-[#854DFF] md:p-8 p-4"
           >
             <img src="assets/images/icon-arrow.svg" alt="" />
           </button>
         </div>
 
         {/* แสดงผลลัพธ์ที่คำนวณได้ */}
-        <div className="md:text-8xl font-bold text-5xl  ">
+        <div className="md:text-8xl font-bold text-5xl mb-6=  ">
           <h1>
             <span className="text-[#854DFF]">{ageYears}</span> years
           </h1>
