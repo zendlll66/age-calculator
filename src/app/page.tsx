@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-
+import Spline from "@splinetool/react-spline";
 export default function Home() {
   // กำหนด type ให้กับ state
   const [day, setDay] = useState<number | "">("");
@@ -48,10 +48,15 @@ export default function Home() {
 
   return (
     <div className="flex bg-black/60 h-full w-full justify-center items-center p-4" >
-      <div className="relative flex flex-col space-x-10 md:w-[970px] md:h-[700px] w-full bg-white md:rounded-[64px]  md:rounded-br-[270px] rounded-[24px] rounded-br-[170px]  shadow-2xs md:p-[50px] p-[20px]">
-        <div className="flex flex-row gap-x-2 md:space-x-5  w-full p-2">
-          <div className="flex flex-col w-auto">
-            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>
+      <div>
+        <Spline
+          className="flex absolute h-screen top-0 left-0 size-[120%]"
+          scene="https://prod.spline.design/6rH0bxqyOIeNmP6I/scene.splinecode"
+        /></div>
+      <div className="relative flex flex-col space-x-10 md:w-[970px] md:h-[700px] w-full border-2 drop-shadow-lg border-[#854DFF] bg-black/40  backdrop-blur-xl md:rounded-[64px]  md:rounded-br-[270px] rounded-[24px] rounded-br-[170px]  shadow-2xs md:p-[50px] p-[20px]">
+        <div className="flex flex-row gap-x-2 md:space-x-5  w-full p-2 text-white">
+          <div className="flex flex-col w-auto ">
+            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-white"}`}>
               DAY
             </span>
             <input
@@ -66,7 +71,7 @@ export default function Home() {
             {required == 1 && (<span className="md:text-[18px]  text-[12px] text-red-500">this flied is required</span>)}
           </div>
           <div className="flex flex-col">
-            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>MONTH</span>
+            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-white"}`}>MONTH</span>
             <input
               type="number"
               placeholder="MM"
@@ -79,7 +84,7 @@ export default function Home() {
             {required == 1 && (<span className="md:text-[18px]  text-[12px] text-red-500">this flied is required</span>)}
           </div>
           <div className="flex flex-col">
-            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-black"}`}>YEAR</span>
+            <span className={`md:text-3xl ${required === 1 ? "text-red-500" : "text-white"}`}>YEAR</span>
             <input
               type="number"
               title="Year"
@@ -104,7 +109,7 @@ export default function Home() {
         </div>
 
         {/* แสดงผลลัพธ์ที่คำนวณได้ */}
-        <div className="md:text-8xl font-bold text-5xl mb-6=  ">
+        <div className="md:text-8xl font-bold text-5xl mb-6 text-white ">
           <h1>
             <span className="text-[#854DFF]">{ageYears}</span> years
           </h1>
